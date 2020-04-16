@@ -1,0 +1,335 @@
+#search-wrap{
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba( 255, 255, 255, .98 );
+	z-index: 100; // Should be higher than menu
+	display: none;
+
+	&.active{
+		display: block;
+		-webkit-animation-name: search_wrap_in;
+				animation-name: search_wrap_in;
+		@include animate( .6s );
+	}
+
+	&.fadeOut{
+		-webkit-animation-name: search_wrap_out;
+				animation-name: search_wrap_out;
+		@include animate( .6s );
+	}
+
+	.wrap{
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+
+	form{
+		margin-right: 50px;
+	}
+
+	.search-field{
+		box-sizing: border-box;
+		border-top: none;
+		border-right: none;
+		border-left: none;		
+	}
+
+	.search-submit{
+		display: none;
+	}
+
+	.search-toggle-close{
+		padding: 0;
+		background: 0;
+		box-shadow: none;
+		@include border-radius( 0 );
+		width: 40px;
+		height: 40px;
+		float: right;
+		margin-top: 3px;
+
+		&:before{
+			font-family: 'Genericons';			
+			content: '\f406';
+			padding: 12px;
+			display: inline-block;
+			font-size: 16px;
+		}		
+	}
+}
+
+.admin-bar{
+	#search-wrap{
+		.wrap{
+			padding-top: 74px;
+		}
+	}
+}
+
+#colophon{
+	background: white;
+	border-top: 1px solid $color__border;
+
+	.footer-widgets-wrap{
+		padding: 50px 0 10px;
+
+		&:after{
+			content: '';
+			width: 250px;
+			height: 2px;
+			display: block;
+			background: #DFDFDF;
+			margin: 80px auto 0;
+		}
+
+		&.column-0{
+			display: none;
+		}
+
+		.footer-widgets{
+			display: inline-block;
+			vertical-align: top;
+			color: #6E6E6E;
+			width: 100%;
+
+			.widget{
+				padding-right: 40px;
+			}
+
+			.widget-title{
+				font-weight: 300;
+				margin-top: 30px;
+				margin-bottom: 15px;
+				color: #000;
+				line-height: 1.2;
+			}
+
+			ul{
+				margin-left: 1.25em;
+				padding-left: 0;
+			}
+
+			ul,ol{
+				li{
+					margin-bottom: 5px;
+				}
+			}
+
+			p{
+				margin-top: 0;
+			}
+
+			a{
+				text-decoration: none;
+				color: #6E6E6E;
+
+				&:hover{
+					color: $color__accent;
+				}
+			}
+
+			input[type="text"],
+			input[type="email"],
+			input[type="url"],
+			input[type="password"],
+			input[type="search"],
+			textarea{
+				box-sizing: border-box;
+			}
+		}
+	
+		/**
+		* Default WordPress Widgets
+		*/
+		.widget_rss{
+			.widget-title{
+				a{
+					color: #000;
+
+					&:hover{
+						color: $color__accent;
+					}
+				}
+			}
+
+			ul{
+				margin-left: 0;
+
+				li{
+					list-style: none;
+					margin-bottom: 20px;
+				}
+			}
+
+			.rsswidget{
+				color: $color__accent;
+
+				&:hover{
+					text-decoration: underline;
+					color: #000;
+				}
+			}
+
+			.rss-date{
+				display: block;
+				font-size: .85em;
+				color: #bfbfbf;
+			}
+
+			cite{
+				font-size: .85em;
+			}
+		}
+
+		.widget_recent_comments{
+			li{
+				font-style: italic;
+				color: #000;
+				
+				.comment-author-link,
+				a{
+					font-style: normal;
+					color: #6E6E6E;
+				}
+			}
+		}
+
+		/**
+		* Jetpack widgets
+		*/
+		.widget_contact_info{
+			.contact-map{
+				margin-bottom: 15px;
+			}
+
+			.confit-address,
+			.confit-phone,
+			.confit-hours{
+				font-size: .9em;
+			}
+		}
+
+		.widget_jetpack_display_posts_widget{
+			h4{
+				font-weight: 300;
+				@include font-size( 1 );
+			}
+		}
+
+		.widget_facebook_likebox{
+			.widget-title{
+				a{
+					color: #000;
+
+					&:hover{
+						color: $color__accent;
+					}
+				}
+			}
+		}
+
+		.widget-grofile{
+			.grofile-thumbnail{
+				border: 3px solid #000;
+			}
+
+			h4{
+				a{
+					color: #000;
+				}
+			}
+		}
+
+		.widget_image{
+			figure{
+				margin: 0;
+			}
+
+			.wp-caption-text{
+				margin-top: .5em;
+			}
+		}
+
+		.widget_rss_links{
+			a{
+				vertical-align: middle;
+				display: inline-block;
+				line-height: 1;
+			}
+		}
+	}
+
+	.site-info{
+		text-align: center;
+		padding: 50px 0;
+
+		a{
+			&:hover{
+				color: $color__accent;
+			}
+		}
+	}
+}
+
+/* WordPress' admin bar breakpoint */
+@media screen and (min-width: 783px ){
+	.admin-bar{
+		#search-wrap{
+			.wrap{
+				padding-top: 60px;
+			}
+		}
+	}	
+}
+
+/* Tablet landscape + Desktop Adjustment */
+@media screen and ( min-width: $size__breakpoint-desktop ){
+	#search-wrap{
+		.wrap{				
+			padding-top: 35px;
+		}
+
+		.search-field{
+			@include font-size( 3 );
+		}
+	}
+
+	.admin-bar{
+		#search-wrap{
+			.wrap{				
+				padding-top: 65px;
+			}
+		}
+	}
+
+	#colophon{
+		.footer-widgets-wrap{
+			&.column-1{
+				.footer-widgets{				
+					width: 100%;
+				}			
+			}
+
+			&.column-2{
+				.footer-widgets{				
+					width: 50%;
+				}
+			}
+
+			&.column-3{
+				.footer-widgets{				
+					width: 33%;
+				}			
+			}
+
+			&.column-4{
+				.footer-widgets{				
+					width: 25%;
+				}			
+			}			
+		}
+	}
+}

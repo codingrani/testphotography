@@ -1,0 +1,414 @@
+.main-navigation {
+	display: block;
+	@include font-size( 1.125 );
+	position: absolute;
+	top: 33px;
+	right: 0;
+	left: 0;
+	z-index: 50; // should be lower than #masthead .site-branding
+
+	.menu-wrap{
+		position: absolute;
+		top: 60px;
+		right: 0;
+		left: 0;
+		background: $color__accent;
+		box-shadow: 0 3px 5px rgba( 0, 0, 0, .2 );
+
+		&:before{
+			display: none;
+			content: '';
+			width: 12px;
+			height: 12px;
+			background: $color__accent;
+			position: absolute;
+			top: -6px;
+			right: 60px;
+			-webkit-transform: rotate(-45deg);
+			-moz-transform: rotate(-45deg);
+ 			-o-transform: rotate(-45deg);	
+		}
+	}	
+
+	.menu-toggle{
+		padding: 0;
+		background: 0;
+		box-shadow: none;
+		@include border-radius( 0 );
+		width: 40px;
+		height: 40px;
+		float: right;
+		margin-top: -3px;
+		margin-right: 45px;
+
+		&:before{
+			font-family: 'Genericons';			
+			content: '\f419';
+			padding: 8px;
+			display: inline-block;
+			font-size: 24px;
+		}
+	}
+
+	ul{		
+		list-style: none;
+		margin: 0;
+		padding-left: 0;
+		display: none;
+
+		ul{
+			display: block;
+			margin-left: 1em;
+			font-size: .8em;
+			text-transform: uppercase;
+
+			a{
+				border-bottom: none;
+			}
+		}
+	}
+
+	a {
+		display: block;
+		text-decoration: none;
+		padding: 8px 15px;
+		border-bottom: 1px dotted rgba(255, 255, 255, .4);
+	}
+}
+
+.comment-navigation,
+.posts-navigation {
+	padding: 50px 4px 30px;
+
+	a{
+		background: #2E2E2E;
+		color: white;
+		text-decoration: none;
+		@include font-size( 1.125 );
+		padding: 10px 20px;
+		@include border-radius( 5px );
+		display: inline-block;
+		line-height: 1;
+
+		&:hover{
+			background: $color__accent;
+		}
+	}
+
+	.site-main & {
+		margin: 0 0 1.5em;
+		overflow: hidden;
+	}
+
+	& .nav-previous {
+		float: left;
+		width: 50%;
+
+		a{
+			margin-right: 10px;
+		}
+	}
+
+	& .nav-next {
+		float: right;
+		text-align: right;
+		width: 50%;
+
+		a{
+			margin-left: 10px;
+		}
+	}
+}
+
+.post-navigation{
+	padding: 30px 0;
+
+	.nav-previous,
+	.nav-next{
+		a{
+			background: #1B1B1B;
+			color: white;
+			display: block;
+			text-decoration: none;
+			padding: 30px 25px 28px;
+			margin-bottom: 10px;
+			position: relative;
+			background-size: cover;
+			@include smooth_transition();
+
+			&:after{
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				content: '';	
+				background: #000;
+				opacity: .25;
+			}
+
+			.meta-nav{
+				@include font-size( .875 );
+				text-transform: uppercase;
+				opacity: .75;
+				display: block;
+				position: relative;
+				z-index: 10;
+			}
+
+			.post-title{
+				@include font-size( 1.25 );	
+				text-shadow: 0 1px 2px #000;
+				display: block;
+				position: relative;
+				z-index: 10;
+				line-height: 1.2;
+			}
+
+			&:hover{
+				opacity: .75;
+			}
+		}
+	}
+}
+
+.comment-navigation{
+	overflow: hidden;
+	padding: 30px 0 30px;
+
+	&#comment-nav-above{
+		padding: 0 0 45px;
+	}
+}
+
+/* Mobile only */
+@media screen and ( max-width: $size__breakpoint-desktop ){
+	.main-navigation{
+		&.toggled{
+			.menu-wrap{
+				-webkit-animation-name: main_nav_mobile_in;
+						animation-name: main_nav_mobile_in;
+				@include animate( .4s );
+
+				&:before{				
+					display: block;
+				}
+			}
+
+			ul,
+			.nav-menu{
+				display: block;
+			}
+		}
+
+		&.fadeOut{
+			.menu-wrap{	
+				-webkit-animation-name: main_nav_mobile_out;
+						animation-name: main_nav_mobile_out;
+				@include animate( .4s );
+			}
+		}
+	}
+}
+
+/* Tablet landscape + Desktop Adjustment */
+@media screen and ( min-width: $size__breakpoint-desktop ){
+	.main-navigation{
+
+		.menu-wrap{
+			background: none !important;
+			box-shadow: none;
+			top: 0;
+			left: auto;
+			right: 45px;
+		}
+
+		.menu-toggle{
+			display: none;
+		}
+
+		ul {
+			display: block;
+
+			ul {
+				float: left;
+				position: absolute;
+				top: 2.4em;
+				display: none;
+				z-index: 99999;
+				margin-left: 0;
+				@include font-size( 1 );
+
+				ul {
+					display: none;
+					top: 0;
+				}
+
+				li {
+					&:hover > ul {
+						left: 100%;
+					}
+				}
+
+				a {
+					width: 200px;
+				}
+
+				:hover > a {
+				}
+
+				a:hover {
+				}
+			}
+
+			li:hover > ul {
+				left: auto;
+				display: block;
+			}
+		}
+
+		li {
+			float: left;
+			position: relative;
+			
+			&.current-menu-item,
+			&:hover{
+				> a{
+					color: $color__accent;
+				}
+			}
+		}
+		
+		.page_item_has_children,
+		.menu-item-has-children{
+			> a{
+				&:after{
+					content: '\f431';
+					font-family: 'Genericons';
+					vertical-align: middle;
+					margin-left: 5px;
+				}
+			}
+	
+			.page_item_has_children,
+			.menu-item-has-children{
+				> a{
+					&:after{
+						content: '\f429';
+					}
+				}
+			}
+
+			&:hover{
+				box-shadow: 0 3px 3px rgba(0,0,0,.5);
+
+				> a{
+					background: $color__accent;
+					color: #000;
+				}
+				
+				.children,
+				.sub-menu{
+					box-shadow: 0 3px 3px rgba(0,0,0,.5);
+
+					li{
+						&.current-menu-item,
+						&:hover{
+							box-shadow: none;
+
+							a{
+								color: #000;
+							}
+						}
+						
+						.children,
+						.sub-menu{
+							box-shadow: 2px 2px 2px rgba(0,0,0,.5);						
+						}
+
+						a{
+							&:hover{
+								background: lighten( $color__accent, 10% );
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		.children,
+		.sub-menu{
+			background: $color__accent;
+		}
+	}
+
+	.comment-navigation,
+	.posts-navigation{
+		a{
+			padding: 15px 25px;
+		}
+
+		& .nav-previous{
+			a{
+				margin-right: 0;
+
+				&:before{
+					content: '\f430';
+					font-family: 'Genericons';
+					vertical-align: middle;
+					@include font-size( 1.125 );
+					line-height: 1;
+					margin-right: 10px;
+				}
+			}
+		}
+
+		& .nav-next{
+			a{
+				margin-left: 0;
+
+				&:after{
+					content: '\f429';
+					font-family: 'Genericons';
+					vertical-align: middle;
+					@include font-size( 1.125 );
+					line-height: 1;
+					margin-left: 10px;
+				}
+			}
+		}
+	}
+
+	.post-navigation{
+		.nav-previous,
+		.nav-next{
+			a{
+				.meta-nav{
+					@include font-size( .9375 );
+				}
+
+				.post-title{
+					@include font-size( 1.5 );			
+				}
+			}
+		}		
+	}	
+}
+
+/* Desktop Large Adjustment */
+@media screen and ( min-width: $size__breakpoint-desktop-large ){
+	.post-navigation{
+		.nav-previous,
+		.nav-next{
+			a{
+				.meta-nav{
+					@include font-size( 1 );
+				}
+
+				.post-title{
+					@include font-size( 1.625 );			
+				}
+			}
+		}		
+	}
+}
